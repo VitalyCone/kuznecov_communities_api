@@ -1,11 +1,11 @@
 package apiserver
 
 type Config struct {
-	BindAddr string `toml:"bind_addr"`
+	ApiAddr string `toml:"bind_addr"`
 }
 
-func NewConfig() *Config {
+func NewConfig(apiAddr string) (*Config) {
 	return &Config{
-		BindAddr: ":8080",
+		ApiAddr: apiAddr,
 	}
 }

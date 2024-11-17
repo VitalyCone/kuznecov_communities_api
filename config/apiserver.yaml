@@ -1,0 +1,11 @@
+api_addr: ":8001"
+database_url: "host=localhost port=5432 user=postgres dbname=kuznecov_communities password=admin sslmode=disable"
+database_docker_url: "host=db port=5432 user=admin dbname=kuznecov_communities password=admin sslmode=disable"
+
+service_url:
+  cloud_storage: 
+    docker_host: "kzcv-cloud-storage-image-kzcv-cloud-storage-1"
+    local_host: "localhost"
+
+    file_ep: "http://EMPTY:8000/cloudstorage/file"
+    

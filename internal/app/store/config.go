@@ -1,11 +1,11 @@
 package store
 
-type Config struct{
-	databaseURL string `toml:"database_url"`
+type Config struct {
+	DatabaseURL string
 }
 
-func NewConfig() *Config{
+func NewConfig(DbURL string) (*Config) {
 	return &Config{
-		databaseURL: "host=localhost port=5322 user=admin dbname=kuznecov_communities password=admin sslmode=disable",
+		DatabaseURL: DbURL,
 	}
 }

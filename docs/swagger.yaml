@@ -1,0 +1,59 @@
+info:
+  contact: {}
+paths:
+  /publication:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Post publication
+      parameters:
+      - collectionFormat: csv
+        description: files
+        in: formData
+        items:
+          type: file
+        name: files
+        type: array
+      - in: formData
+        name: text
+        type: string
+      produces:
+      - multipart/form-data
+      responses: {}
+      summary: Post publication
+      tags:
+      - Publication
+  /publication/{id}:
+    delete:
+      consumes:
+      - multipart/form-data
+      description: Delete publication
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - multipart/form-data
+      responses: {}
+      summary: Delete publication
+      tags:
+      - Publication
+    get:
+      consumes:
+      - application/json
+      description: Get publication
+      parameters:
+      - description: publication id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: Get publication
+      tags:
+      - Publication
+swagger: "2.0"
