@@ -1,4 +1,4 @@
-<h1>Kuznecov Cloud Storage API<h1>
+<h1>Kuznecov Communities API<h1>
 <h5>
 <p><b>FOR USING THIS API YOU MUST RUN <b><a href="https://github.com/VitalyCone/kuznecov_cloud_storage_api">https://github.com/VitalyCone/kuznecov_cloud_storage_api</a><p>
 </p>Usage</p>
@@ -12,5 +12,5 @@
 <code>migrate -path migrations -database "postgres://admin:admin@localhost:5001/kuznecov_communities?sslmode=disable" up</code>
 <p></p>
 <p>3. Join in swagger on your browser for check API documentation</p>
-<a href="http://localhost:8001/swagger/index.html">http://localhost:8000/swagger/index.html</a>
+<a href="http://localhost:8001/swagger/index.html">http://localhost:8001/swagger/index.html</a>
 </h5>
