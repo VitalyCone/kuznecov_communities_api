@@ -1,6 +1,26 @@
 info:
   contact: {}
 paths:
+  /news:
+    get:
+      consumes:
+      - application/json
+      description: Get News
+      parameters:
+      - description: offset from first responses
+        in: query
+        name: offset
+        type: integer
+      - description: restriction on return of publications
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: Get News
+      tags:
+      - Publication
   /publication:
     post:
       consumes:

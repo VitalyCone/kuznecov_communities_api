@@ -15,6 +15,36 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/news": {
+            "get": {
+                "description": "Get News",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Publication"
+                ],
+                "summary": "Get News",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "offset from first responses",
+                        "name": "offset",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "restriction on return of publications",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/publication": {
             "post": {
                 "description": "Post publication",

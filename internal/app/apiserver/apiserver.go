@@ -49,6 +49,7 @@ func (s *APIServer) configureEndpoints() {
 	docs.SwaggerInfo.BasePath = mainPath
 	path := s.router.Group(mainPath)
 	path.GET("/publication/:id", endpoint.GetPublication) 
+	path.GET("/news", endpoint.GetNews) 
 	path.POST("/publication", endpoint.PostPublication) 
 	path.DELETE("/publication/:id", endpoint.DeletePublication)
 	// {

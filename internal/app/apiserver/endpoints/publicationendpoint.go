@@ -3,7 +3,6 @@ package endpoints
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -25,37 +24,41 @@ import (
 // @Param id path int true "publication id"
 // @Router /publication/{id} [GET]
 func (ep *Endpoints) GetPublication(g *gin.Context) {
-	respFiles:=  make([]requestmodel.FileResponse, 0)
-
 	id, err := strconv.Atoi(g.Param("id"))
 	if err != nil {
 		g.JSON(http.StatusBadRequest, gin.H{"error": error.Error(err)})
 		return
 	}
 
-	publication, err := ep.store.Publication().Get(id)
+	publication, err := ep.store.Publication().GetById(id)
 	if err != nil{
 		g.JSON(http.StatusNotFound, gin.H{"message": "Failed to get publication: " + err.Error()})
 		return
 	}
 
 	//g.JSON(http.StatusNotFound, publication.FileIds)
-	for _,fileId := range publication.FileIds{
-		resp, err := http.Get(fmt.Sprintf("%s/%d",serviceurl.Get().CloudStorage.FileUrl,fileId))
-		if err!= nil{
-			g.JSON(http.StatusInternalServerError, gin.H{"message": "Failed send request to other api: " + err.Error()})
-			return
-		}
-		defer resp.Body.Close()
+	// for _,fileId := range publication.FileIds{
+	// 	resp, err := http.Get(fmt.Sprintf("%s/%d",serviceurl.Get().CloudStorage.FileUrl,fileId))
+	// 	if err!= nil{
+	// 		g.JSON(http.StatusInternalServerError, gin.H{"message": "Failed send request to other api: " + err.Error()})
+	// 		return
+	// 	}
+	// 	defer resp.Body.Close()
 
-		file := requestmodel.FileResponse{}
+	// 	file := requestmodel.FileResponse{}
 
-		if err := json.NewDecoder(resp.Body).Decode(&file); err != nil {
-			g.JSON(http.StatusInternalServerError, gin.H{"message": "Files decode files from other api: " + err.Error()})
-			return
-		}
-		respFiles = append(respFiles, file)
+	// 	if err := json.NewDecoder(resp.Body).Decode(&file); err != nil {
+	// 		g.JSON(http.StatusInternalServerError, gin.H{"message": "Files decode files from other api: " + err.Error()})
+	// 		return
+	// 	}
+	// 	respFiles = append(respFiles, file)
+	// }
+	respFiles, err := requestFilesInCloudStorage(publication.FileIds)
+	if err != nil{
+		g.JSON(http.StatusInternalServerError, gin.H{"message": "Failed send request to cloud storage: " + err.Error()})
+		return
 	}
+
 	publicationDetails := dtos.CreatePublicationDetailsDto{
 		Data: publication,
 		Files: respFiles,
